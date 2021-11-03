@@ -3,7 +3,6 @@ package com.minhasfinancas.MinhasFinancas.model.entity;
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.Objects;
 
 @Entity
 @Table (name= "usuario", schema = "financas")
@@ -24,4 +23,7 @@ public class Usuario {
     @Column(name= "senha")
     private  String senha;
 
+    public Usuario() {
+
+    }
 }
