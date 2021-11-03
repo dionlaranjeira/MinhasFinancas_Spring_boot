@@ -13,6 +13,7 @@ import java.time.LocalDate;
 @Entity
 @Table(name = "lancamento", schema = "financas")
 @Data
+@Builder
 public class Lancamento {
 
     @Id
@@ -48,7 +49,4 @@ public class Lancamento {
     @Enumerated(value = EnumType.STRING)
     private StatusLancamento status;
 
-    public Lancamento() {
-
-    }
 }

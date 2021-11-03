@@ -7,6 +7,7 @@ import javax.persistence.*;
 @Entity
 @Table (name= "usuario", schema = "financas")
 @Data
+@Builder
 public class Usuario {
 
     @Id
@@ -23,7 +24,4 @@ public class Usuario {
     @Column(name= "senha")
     private  String senha;
 
-    public Usuario() {
-
-    }
 }
