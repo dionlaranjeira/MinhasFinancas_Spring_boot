@@ -5,17 +5,24 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-@SpringBootTest
+
 @ExtendWith(SpringExtension.class)
 @ActiveProfiles("test")
+@DataJpaTest
+@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 public class UsuarioRepositotyTest {
 
     @Autowired
     UsuarioRepository repository;
+    @Autowired
+    TestEntityManager entityManager;
 
     @Test
     public void verificaExistenciaEmail(){
@@ -26,7 +33,7 @@ public class UsuarioRepositotyTest {
                 .email("andreinaandrade.rr@gmail.com")
                 .senha("123456")
                 .build();
-        repository.save(usuario);
+        entityManager.persist(usuario);
 
         //ação / execução
 
@@ -40,7 +47,6 @@ public class UsuarioRepositotyTest {
     @Test
     public void retornaFalsoSemEmailCadastrado(){
         //cenário
-        repository.deleteAll();
 
         //acao
         boolean result = repository.existsByEmail("usuario@email.com");
